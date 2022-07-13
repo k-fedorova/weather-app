@@ -1,0 +1,30 @@
+.current-weather {
+  margin: 15px 0;
+  margin-bottom: 25px;
+}
+.city {
+  border: solid;
+}
+
+.city i {
+  font-size: 32px;
+  color: gray;
+}
+
+.current-condition {
+  font-size: 48px;
+}
+
+.weather-cards i {
+  font-size: 32px;
+}
+
+.container {
+  margin-top: 30px;
+  border: solid 1px;
+  max-width: 600px;
+  padding: 15px 30px;
+}
+input {
+  max-width: 200px;
+}
