@@ -28,3 +28,7 @@
 input {
   max-width: 200px;
 }
+.author {
+  margin: 0 auto;
+  max-width: 600px;
+}
