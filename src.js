@@ -6,6 +6,7 @@ const cityInput = document.querySelector("#city-input");
 const form = document.querySelector("#city");
 const currentTemperature = document.querySelector("#current-temperature");
 const currentCityName = document.querySelector("#current-city-name");
+const iconElement = document.querySelector("#icon");
 
 let now = new Date();
 let days = [
@@ -15,7 +16,7 @@ let days = [
   "Wednesday",
   "Thursday",
   "Friday",
-  "Saturday"
+  "Saturday",
 ];
 
 let day = days[now.getDay()];
@@ -39,7 +40,11 @@ currentCity.addEventListener("click", showForm);
 function showCity(event) {
   event.preventDefault();
   let cityInputValue = cityInput.value;
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityInputValue}&appid=${apiKey}&units=metric`;
+  updateCity(cityInputValue);
+}
+
+function updateCity(cityName) {
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showTemperature);
 }
 
@@ -51,4 +56,11 @@ function showTemperature(response) {
   currentCity.hidden = false;
   citySubmit.hidden = true;
   currentCityName.innerHTML = response.data.name;
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+
+  console.log(response.data);
 }
+updateCity("Lisbon");
