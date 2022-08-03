@@ -7,6 +7,7 @@ const form = document.querySelector("#city");
 const currentTemperature = document.querySelector("#current-temperature");
 const currentCityName = document.querySelector("#current-city-name");
 const iconElement = document.querySelector("#icon");
+const weatherMainElement = document.querySelector("#weather-main");
 
 let now = new Date();
 let days = [
@@ -51,6 +52,8 @@ function updateCity(cityName) {
 form.addEventListener("submit", showCity);
 
 function handleResponse(response) {
+  let weather = response.data.weather[0];
+
   currentTemperature.innerHTML = Math.round(response.data.main.temp);
 
   currentCity.hidden = false;
@@ -58,9 +61,11 @@ function handleResponse(response) {
   currentCityName.innerHTML = response.data.name;
   iconElement.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    `http://openweathermap.org/img/wn/${weather.icon}@2x.png`
   );
-  iconElement.setAttribute("alt", response.data.weather[0].description);
+  iconElement.setAttribute("alt", weather.description);
+  weatherMainElement.innerHTML =
+    weather.description[0].toUpperCase() + weather.description.substring(1);
 
   console.log(response.data);
 }
