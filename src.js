@@ -4,10 +4,14 @@ const citySubmit = document.querySelector("#city-submit");
 const currentCity = document.querySelector("#current-city");
 const cityInput = document.querySelector("#city-input");
 const form = document.querySelector("#city");
-const currentTemperature = document.querySelector("#current-temperature");
+const currentCelsiusTemperatureElement = document.querySelector(
+  "#current-celsius-temperature"
+);
 const currentCityName = document.querySelector("#current-city-name");
 const iconElement = document.querySelector("#icon");
 const weatherMainElement = document.querySelector("#weather-main");
+const celsiusBlockElement = document.querySelector("#celsius-block");
+const fahrenheitBlockElement = document.querySelector("#fahrenheit-block");
 
 let now = new Date();
 let days = [
@@ -54,7 +58,9 @@ form.addEventListener("submit", showCity);
 function handleResponse(response) {
   let weather = response.data.weather[0];
 
-  currentTemperature.innerHTML = Math.round(response.data.main.temp);
+  currentCelsiusTemperatureElement.innerHTML = Math.round(
+    response.data.main.temp
+  );
 
   currentCity.hidden = false;
   citySubmit.hidden = true;
@@ -69,4 +75,15 @@ function handleResponse(response) {
 
   console.log(response.data);
 }
+
+function showFahrenheit(event) {
+  event.preventDefault();
+
+  fahrenheitBlockElement.hidden = false;
+  celsiusBlockElement.hidden = true;
+}
+
+let toFahrenheitElement = document.querySelector("#to-fahrenheit");
+toFahrenheitElement.addEventListener("click", showFahrenheit);
+
 updateCity("Lisbon");
