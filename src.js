@@ -7,6 +7,10 @@ const form = document.querySelector("#city");
 const currentCelsiusTemperatureElement = document.querySelector(
   "#current-celsius-temperature"
 );
+const currentFahrenheitTemperatureElement = document.querySelector(
+  "#current-fahrenheit-temperature"
+);
+
 const currentCityName = document.querySelector("#current-city-name");
 const iconElement = document.querySelector("#icon");
 const weatherMainElement = document.querySelector("#weather-main");
@@ -56,10 +60,14 @@ function updateCity(cityName) {
 form.addEventListener("submit", showCity);
 
 function handleResponse(response) {
+  console.log(response.data);
   let weather = response.data.weather[0];
 
   currentCelsiusTemperatureElement.innerHTML = Math.round(
     response.data.main.temp
+  );
+  currentFahrenheitTemperatureElement.innerHTML = Math.round(
+    (response.data.main.temp * 9) / 5 + 32
   );
 
   currentCity.hidden = false;
@@ -72,8 +80,6 @@ function handleResponse(response) {
   iconElement.setAttribute("alt", weather.description);
   weatherMainElement.innerHTML =
     weather.description[0].toUpperCase() + weather.description.substring(1);
-
-  console.log(response.data);
 }
 
 function showFahrenheit(event) {
@@ -88,9 +94,11 @@ toFahrenheitElement.addEventListener("click", showFahrenheit);
 
 function showCelsius(event) {
   event.preventDefault();
+
   fahrenheitBlockElement.hidden = true;
   celsiusBlockElement.hidden = false;
 }
+
 let toCelsiusElement = document.querySelector("#to-celsius");
 toCelsiusElement.addEventListener("click", showCelsius);
 
