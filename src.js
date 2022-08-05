@@ -86,4 +86,12 @@ function showFahrenheit(event) {
 let toFahrenheitElement = document.querySelector("#to-fahrenheit");
 toFahrenheitElement.addEventListener("click", showFahrenheit);
 
+function showCelsius(event) {
+  event.preventDefault();
+  fahrenheitBlockElement.hidden = true;
+  celsiusBlockElement.hidden = false;
+}
+let toCelsiusElement = document.querySelector("#to-celsius");
+toCelsiusElement.addEventListener("click", showCelsius);
+
 updateCity("Lisbon");
