@@ -17,8 +17,8 @@ const weatherMainElement = document.querySelector("#weather-main");
 const celsiusBlockElement = document.querySelector("#celsius-block");
 const fahrenheitBlockElement = document.querySelector("#fahrenheit-block");
 
-function makeDate() {
-  let now = new Date();
+function makeDate(timestamp) {
+  let now = new Date(timestamp);
   let days = [
     "Sunday",
     "Monday",
@@ -80,7 +80,7 @@ function handleResponse(response) {
   iconElement.setAttribute("alt", weather.description);
   weatherMainElement.innerHTML =
     weather.description[0].toUpperCase() + weather.description.substring(1);
-  currentDate.innerHTML = makeDate();
+  currentDate.innerHTML = makeDate(response.data.dt * 1000);
 }
 
 function showFahrenheit(event) {
