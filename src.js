@@ -17,27 +17,27 @@ const weatherMainElement = document.querySelector("#weather-main");
 const celsiusBlockElement = document.querySelector("#celsius-block");
 const fahrenheitBlockElement = document.querySelector("#fahrenheit-block");
 
-let now = new Date();
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
+function makeDate() {
+  let now = new Date();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
-let day = days[now.getDay()];
-let time = now.getHours();
-let minutes = now.getMinutes();
+  let day = days[now.getDay()];
+  let time = now.getHours();
+  let minutes = now.getMinutes();
 
-if (minutes < 10) {
-  minutes = `0${minutes}`;
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${day} ${time}:${minutes}`;
 }
-let currentTime = `${day} ${time}:${minutes}`;
-
-currentDate.innerHTML = currentTime;
 
 function showForm() {
   citySubmit.hidden = false;
@@ -80,6 +80,7 @@ function handleResponse(response) {
   iconElement.setAttribute("alt", weather.description);
   weatherMainElement.innerHTML =
     weather.description[0].toUpperCase() + weather.description.substring(1);
+  currentDate.innerHTML = makeDate();
 }
 
 function showFahrenheit(event) {
