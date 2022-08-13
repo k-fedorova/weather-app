@@ -107,17 +107,20 @@ updateCity("Lisbon");
 
 function displayForecast() {
   let forecastElement = document.querySelector("#forecast");
-  
-  let days = ["Thu", "Wed", "Fri"];
+
+  let days = ["Thu", "Wed", "Fri", "Sat"];
+  let forecastHTML = "";
   days.forEach(function (day) {
-    forecastElement.innerHTML = `
+    forecastHTML =
+      forecastHTML +
+      `
        <div class="col">
           <h5>${day}</h5>
-
           <img src="http://openweathermap.org/img/wn/10n.png" />
           <h6>10°C ... 17°C</h6>
         </div>
-  `;
+      `;
   });
+  forecastElement.innerHTML = forecastHTML;
 }
 displayForecast();
