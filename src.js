@@ -104,3 +104,20 @@ let toCelsiusElement = document.querySelector("#to-celsius");
 toCelsiusElement.addEventListener("click", showCelsius);
 
 updateCity("Lisbon");
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  
+  let days = ["Thu", "Wed", "Fri"];
+  days.forEach(function (day) {
+    forecastElement.innerHTML = `
+       <div class="col">
+          <h5>${day}</h5>
+
+          <img src="http://openweathermap.org/img/wn/10n.png" />
+          <h6>10°C ... 17°C</h6>
+        </div>
+  `;
+  });
+}
+displayForecast();
