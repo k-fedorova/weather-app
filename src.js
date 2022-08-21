@@ -111,19 +111,24 @@ function getForecast(coordinates) {
 }
 
 function displayForecast(response) {
-  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
 
-  let days = ["Thu", "Wed", "Fri", "Sat"];
+  let dailyForecast = response.data.daily;
   let forecastHTML = "";
-  days.forEach(function (day) {
+  dailyForecast.forEach(function (oneDayForecast) {
+    let weather = oneDayForecast.weather[0];
+
     forecastHTML =
       forecastHTML +
       `
        <div class="col">
-          <h5>${day}</h5>
-          <img src="http://openweathermap.org/img/wn/10n.png" />
-          <h6>10°C ... 17°C</h6>
+          <h5>--</h5>
+          <img src="http://openweathermap.org/img/wn/${
+            weather.icon
+          }.png" alt="${weather.description}" />
+          <h6>${Math.round(oneDayForecast.temp.min)}°C ... ${Math.round(
+        oneDayForecast.temp.max
+      )}°C</h6>
         </div>
       `;
   });
