@@ -113,7 +113,7 @@ function getForecast(coordinates) {
 function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
 
-  let dailyForecast = response.data.daily;
+  let dailyForecast = response.data.daily.slice(0, 5);
   let forecastHTML = "";
   dailyForecast.forEach(function (oneDayForecast) {
     let weather = oneDayForecast.weather[0];
@@ -122,7 +122,8 @@ function displayForecast(response) {
       forecastHTML +
       `
        <div class="col">
-          <h5>--</h5>
+          <h5>${formatForecastDate(oneDayForecast.dt)}</h5>
+         
           <img src="http://openweathermap.org/img/wn/${
             weather.icon
           }.png" alt="${weather.description}" />
@@ -133,4 +134,9 @@ function displayForecast(response) {
       `;
   });
   forecastElement.innerHTML = forecastHTML;
+}
+
+function formatForecastDate(dt) {
+  let date = new Date(dt * 1000);
+  return date.toLocaleDateString("en-US", { weekday: "short" });
 }
