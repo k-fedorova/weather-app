@@ -42,6 +42,8 @@ function makeDate(timestamp) {
 function showForm() {
   citySubmit.hidden = false;
   currentCity.hidden = true;
+  cityInput.focus();
+  cityInput.select();
 }
 
 currentCity.addEventListener("click", showForm);
