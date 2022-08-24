@@ -103,7 +103,7 @@ function showCelsius(event) {
 let toCelsiusElement = document.querySelector("#to-celsius");
 toCelsiusElement.addEventListener("click", showCelsius);
 
-updateCity("Lisbon");
+updateCity("Kyiv");
 
 function getForecast(coordinates) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=current,minutely,hourly,alerts&appid=${apiKey}&units=metric`;
@@ -115,14 +115,21 @@ function displayForecast(response) {
 
   let dailyForecast = response.data.daily.slice(0, 5);
   let forecastHTML = "";
-  dailyForecast.forEach(function (oneDayForecast) {
+  dailyForecast.forEach(function (oneDayForecast, index) {
     let weather = oneDayForecast.weather[0];
+
+    let weekDay;
+    if (index === 0) {
+      weekDay = "Current";
+    } else {
+      weekDay = formatForecastDate(oneDayForecast.dt);
+    }
 
     forecastHTML =
       forecastHTML +
       `
        <div class="col">
-          <h5>${formatForecastDate(oneDayForecast.dt)}</h5>
+          <h5>${weekDay}</h5>
          
           <img src="http://openweathermap.org/img/wn/${
             weather.icon
